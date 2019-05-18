@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import StarCards from './components/StarCards'
+
 import './App.css';
 
 class App extends Component {
@@ -15,10 +17,12 @@ class App extends Component {
 
   getCharacters = URL => {
     // feel free to research what this code is doing.
-    // At a high level we are calling an API to fetch some starwars data from the open web.
+    // At a high level we are calling an API to fetch
+    // some starwars data from the open web.
     // We then take that data and resolve it our state.
     fetch(URL)
       .then(res => {
+        if (!res.ok) {throw res}
         return res.json();
       })
       .then(data => {
@@ -30,9 +34,12 @@ class App extends Component {
   };
 
   render() {
+    // const { starwarsChars } = this.state
+    console.log(this.state.starwarsChars)
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
+        <StarCards starwarsChars={this.state.starwarsChars} />
       </div>
     );
   }
